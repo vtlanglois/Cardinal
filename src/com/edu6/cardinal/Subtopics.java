@@ -13,6 +13,11 @@ public class Subtopics extends JFrame {
         setSize(300, 300);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JPanel pane = new JPanel();
+        topic_programming.addActionListener(e -> {
+            Topics t = new Topics();
+            t.setVisible(true);
+            dispose();
+        });
         pane.add(topic_programming);
         pane.add(topic_AI);
         add(pane);
