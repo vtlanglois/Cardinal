@@ -1,0 +1,15 @@
+
+V's notes, ideas, and observations:
+
+Have subtopics and resource finder be constructed during time needed
+
+make a factory or something to help with constructing buttons for resource finder
+
+make a singleton to manage which page to display and when
+ - hashtable? have each page have a distinct number for it?
+
+use a stack to make back button functionality
+
+class for each category + options
+
+instead of multiple JFrames, hb multiple JPanels with JFrames?
