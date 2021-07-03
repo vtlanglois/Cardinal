@@ -1,26 +1,11 @@
 package com.edu6.cardinal;
 
-import javax.swing.*;
+import com.edu6.cardinal.panels.Topics;
 
 public class Main {
 
     public static void main(String[] args) {
-        JFrame frame = new JFrame("Cardinal");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(300,300);
-        JButton button = new JButton("Press");
-        frame.add(button);
-        try {
-            UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (UnsupportedLookAndFeelException e) {
-            e.printStackTrace();
-        }
-        frame.setVisible(true);
+        Topics bt = new Topics();
+        FrameManager ft = new FrameManager(bt);
     }
 }
