@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
-public class ResourceFinder extends JFrame implements ActionListener {
+public class ResourceFinder extends JPanel implements ActionListener {
     String[] items = {"Block Coding", "Python", "JavaScript", "Java", "C", "C++"};
     ArrayList<JCheckBox> boxes = new ArrayList<>();
     String[] items2 = {"Programming", "Machine Learning", "Artificial Intelligence"};
@@ -20,9 +20,6 @@ public class ResourceFinder extends JFrame implements ActionListener {
     ArrayList<Resource> resources = new ArrayList<>();
 
     public ResourceFinder() {
-        super("Cardinal - CS Subtopics");
-        setSize(500, 500);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLookAndFeel();
         JPanel panel = new JPanel();
         JPanel panel2 = new JPanel();
@@ -56,7 +53,6 @@ public class ResourceFinder extends JFrame implements ActionListener {
         JPanel jp3 = new JPanel();
         jp3.add(label3);
         panel2.add(jp3);
-        setVisible(true);
     }
 
     private static void setLookAndFeel() {

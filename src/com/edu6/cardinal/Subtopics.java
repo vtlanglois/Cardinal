@@ -4,24 +4,22 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Subtopics extends JFrame {
+public class Subtopics extends JPanel {
 
     JButton topic_programming = new JButton("Programming");
     JButton topic_AI = new JButton("AI");
     public Subtopics() {
-        super("Cardinal - CS Subtopics");
-        setSize(300, 300);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        JPanel pane = new JPanel();
+//        super("Cardinal - CS Subtopics");
+//        setSize(300, 300);
+//        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        JPanel pane = new JPanel();
         topic_programming.addActionListener(e -> {
-            Topics t = new Topics();
-            t.setVisible(true);
-            dispose();
+//            ButtonTest bt = new ButtonTest("AfterSubTopics");
+            ResourceFinder rf = new ResourceFinder();
+            FrameTest.switchPanels(rf);
         });
-        pane.add(topic_programming);
-        pane.add(topic_AI);
-        add(pane);
-        //setVisible(true);
+        add(topic_programming);
+        add(topic_AI);
 
 
     }
