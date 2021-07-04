@@ -11,7 +11,7 @@ public class Subtopics extends JPanel {
     public Subtopics() {
         setLookAndFeel();
         topic_programming.addActionListener(e -> {
-            ResourceFinder rf = new ResourceFinder();
+            ResourceFinder rf = new ResourceFinder("computerScience");
             FrameManager.switchPanels(rf);
             FrameManager.addPanelToStack(this);
         });
