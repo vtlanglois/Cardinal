@@ -1,7 +1,6 @@
 package com.edu6.cardinal.panels;
 
 import com.edu6.cardinal.FrameManager;
-import com.edu6.cardinal.ResourceFinder;
 
 import javax.swing.*;
 
