@@ -26,13 +26,13 @@ public class ResourceFinder extends JPanel implements ActionListener {
     JPanel keywordPanel = new JPanel();
 
 
-    public ResourceFinder() {
+    public ResourceFinder(String topic) {
         setLookAndFeel();
         //TODO I am rusty with JSON, and this is the first time im using them in an non-Android program. will double check if efficient -V
         try {
-            Object obj = new JSONParser().parse(new FileReader("src\\com\\edu6\\cardinal\\jsontest.json"));
+            Object obj = new JSONParser().parse(new FileReader("src\\com\\edu6\\cardinal\\resources.json"));
             JSONObject jObj = (JSONObject) obj;
-            JSONArray jArr = (JSONArray) jObj.get("computerScience");
+            JSONArray jArr = (JSONArray) jObj.get(topic);
             for(int i = 0; i<jArr.size(); i++) {
                 JSONObject currentObj = (JSONObject) jArr.get(i);
                 JSONArray keywordJSONArray = (JSONArray) currentObj.get("keywords");

@@ -33,6 +33,15 @@
   "math": [
 
     {
+      "category": "Topics",
+      "keywords": [
+        "Arithmetic",
+        "Algebra",
+        "Geometry",
+        "Calculus"
+      ]
+    },
+    {
       "category": "Age Range",
       "keywords": [
         "Elementary",
