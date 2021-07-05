@@ -1,60 +1,68 @@
 {
-  "computerScience": [
+  "resources": [
     {
-      "category": "Language",
+      "name": "Scratch",
+      "desc": "A free online coding website",
       "keywords": [
         "Block Coding",
+        "Free",
+        "Grades 3-5",
+        "Grades 6-8"
+      ]
+    },
+    {
+      "name": "Scratch Jr.",
+      "desc": "Scratch, for a younger audience",
+      "keywords": [
+        "Block Coding",
+        "Free",
+        "Grades K-2"
+      ]
+    },
+    {
+      "name": "Minecraft: Education Edition - Computer Science",
+      "desc": "Use Minecraft to teach Computer Science!",
+      "keywords" : [
+        "Block Coding",
         "Python",
-        "Java",
+        "Grades 3-5",
+        "Grades 6-8",
+        "Free",
+        "$1-20"
+      ]
+    },
+    {
+      "name": "Microsoft MakeCode Arcade",
+      "desc": "Make retro games while learning programming!",
+      "keywords": [
+        "Free",
+        "Block Coding",
         "JavaScript",
-        "C",
-        "C++"
-      ]
-    },
-
-    {
-      "category": "Age Range",
-      "keywords": [
-        "Elementary",
-        "Middle",
-        "High"
+        "Grades 6-8"
       ]
     },
     {
-      "category": "Cost",
+      "name": "micro:bit",
+      "desc": "Learn how-to program hardware!",
       "keywords": [
         "Free",
         "$1-20",
-        "$20-40"
-      ]
-    }
-  ],
-
-  "math": [
-
-    {
-      "category": "Topics",
-      "keywords": [
-        "Arithmetic",
-        "Algebra",
-        "Geometry",
-        "Calculus"
+        "JavaScript",
+        "Python",
+        "Block Coding",
+        "Grades 6-8"
       ]
     },
     {
-      "category": "Age Range",
-      "keywords": [
-        "Elementary",
-        "Middle",
-        "High"
-      ]
-    },
-    {
-      "category": "Cost",
+      "name": "micro:bit EXTREME!!!",
+      "desc": "Learn how-to program hardware!",
       "keywords": [
         "Free",
         "$1-20",
-        "$20-40"
+        "JavaScript",
+        "Python",
+        "Block Coding",
+        "Grades 9+"
       ]
     }
   ]
