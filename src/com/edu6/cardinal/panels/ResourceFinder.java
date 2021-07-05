@@ -17,26 +17,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ResourceFinder extends JPanel implements ActionListener {
-    JLabel label3 = new JLabel("Resources");
-    ArrayList<Resource> resources = new ArrayList<>();
     List<ResourceCard> resourceCards = new ArrayList<>();
     List<KeywordSelector> keywordSelectors = new ArrayList<>();
     JPanel keywordPanel = new JPanel();
     JPanel resourcePanel = new JPanel();
 
-
     public ResourceFinder(String topic) {
         setLookAndFeel();
         //TODO I am rusty with JSON, and this is the first time im using them in an non-Android program. will double check if efficient -V
         //TODO: will need to rewrite JSON system at some point, especially when more data will be in each file -V
+        //TODO: maybe make a JSONManager class to handle the file format? or swap to mongoDB?
         try {
             Object obj = new JSONParser().parse(new FileReader("src\\com\\edu6\\cardinal\\keywords.json"));
             JSONObject jObj = (JSONObject) obj;
             JSONArray jArr = (JSONArray) jObj.get(topic);
+            //go thru jArr, make JSONObject into a KeywordSelector
             for(int i = 0; i<jArr.size(); i++) {
                 JSONObject currentObj = (JSONObject) jArr.get(i);
                 JSONArray keywordJSONArray = (JSONArray) currentObj.get("keywords");
                 ArrayList<String> keywords = new ArrayList<>();
+                //add keywords to a seperate ArrayList
+                //TODO: see if theres a way to do this step in one-line
                 for(int j = 0; j<keywordJSONArray.size();j++) {
                     keywords.add((String) keywordJSONArray.get(j));
                 }
@@ -46,6 +47,7 @@ public class ResourceFinder extends JPanel implements ActionListener {
             obj =  new JSONParser().parse(new FileReader("src\\com\\edu6\\cardinal\\resources.json"));
             jObj = (JSONObject) obj;
             jArr = (JSONArray) jObj.get("resources");
+            //do the same, but with resourcecards
             for(int i = 0; i <jArr.size(); i++) {
                 System.out.println(jArr.toJSONString());
                 JSONObject currentObj = (JSONObject) jArr.get(i);
@@ -63,32 +65,31 @@ public class ResourceFinder extends JPanel implements ActionListener {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
+        JTextField textField = new JTextField();
         keywordPanel.setLayout(new BoxLayout(keywordPanel, BoxLayout.PAGE_AXIS));
         resourcePanel.setLayout(new BoxLayout(resourcePanel, BoxLayout.PAGE_AXIS));
+        //add all KeywordSelectors to their panel
         for(KeywordSelector keywordSelector : keywordSelectors) {
             keywordPanel.add(keywordSelector);
         }
+        //add all ResourceCards to their panel
         for(ResourceCard resourceCard : resourceCards) {
             resourcePanel.add(resourceCard);
         }
-        //TODO: Rework code
-        for (int i = 0; i<3; i++) {
-            ArrayList<String> strings = new ArrayList<>();
-            strings.add("Python");
-            if(i==2) {
-                strings.add("High");
-            }
-            if(i==1) {
-                strings.add("Free");
-            }
-            Resource r = new Resource(i+"A", i+"B", strings);
-            resources.add(r);
-            label3.setText(label3.getText()+ ", " + resources.get(i).getName());
-        }
+        //add objects
+        add(textField, BorderLayout.NORTH);
         add(keywordPanel, BorderLayout.LINE_START);
         add(resourcePanel, BorderLayout.LINE_END);
-
+        //TODO: make searching better, rn its a very rough draft
+        textField.addActionListener(e -> {
+            for (ResourceCard resourceCard : resourceCards) {
+                if (resourceCard.containsText(textField.getText())) {
+                    resourceCard.setVisible(true);
+                } else {
+                    resourceCard.setVisible(false);
+                }
+            }
+        });
     }
 
     private static void setLookAndFeel() {
@@ -109,27 +110,22 @@ public class ResourceFinder extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         System.out.println("finding!");
-        AbstractButton absButton = (AbstractButton) e.getSource();
         List<String> searchedKeywords = new ArrayList<>();
-        label3.setText("");
 
+        //add all keywords selected in each keyword selector onto a sinlge list
         for(KeywordSelector keywordSelector : keywordSelectors) {
             searchedKeywords.addAll(keywordSelector.findSelectedKeywords());
         }
 
         System.out.println(searchedKeywords.toString());
 
-//        for (Resource resource : resources) {
-//            if (resource.containsAll(searchedKeywords)) {
-//                label3.setText(label3.getText() + ", " + resource.getName());
-//            }
-//        }
-
+        //check if each ResourceCard contains all selected keywords
+        //if so, set it to be visible
         for (ResourceCard resourceCard : resourceCards) {
-            if(!(resourceCard.getKeywords().containsAll(searchedKeywords))) {
-                resourceCard.setVisible(false);
-            } else {
+            if(resourceCard.getKeywords().containsAll(searchedKeywords)) {
                 resourceCard.setVisible(true);
+            } else {
+                resourceCard.setVisible(false);
             }
         }
 
@@ -161,6 +157,8 @@ public class ResourceFinder extends JPanel implements ActionListener {
 
         }
 
+        //search through each JCheckBox, see if it is selected
+        //if so, add text to an ArrayList, return list
         public ArrayList<String> findSelectedKeywords() {
             selectedKeywords.clear();
             System.out.println("searching!");
@@ -173,6 +171,8 @@ public class ResourceFinder extends JPanel implements ActionListener {
         }
 
 
+        //check if dropdown close button has been pressed or not
+        //determine if you want to show JCheckBoxes or not
         @Override
         public void actionPerformed(ActionEvent e) {
             if (close.getText().equals("V")) {
@@ -208,6 +208,11 @@ public class ResourceFinder extends JPanel implements ActionListener {
             return resource.getKeywords();
         }
 
+        //check if either the name or desc of the resource contains the inputted text
+        //String -> boolean
+        public boolean containsText(String text) {
+            return resource.getName().contains(text) || resource.getDesc().contains(text);
+        }
     }
 
 }
