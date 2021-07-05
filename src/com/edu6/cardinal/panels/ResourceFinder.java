@@ -137,16 +137,20 @@ public class ResourceFinder extends JPanel implements ActionListener {
 
 
     //TODO theres probably a better way to implement this, esp so that we dont have to pass the instance of ResourceFinder
-    public class KeywordSelector extends JPanel {
+    public class KeywordSelector extends JPanel implements ActionListener{
 
         private ArrayList<JCheckBox> keywordBoxes = new ArrayList<>();
         private JLabel category;
         private ArrayList<String> selectedKeywords = new ArrayList<>();
+        private JButton close;
         public KeywordSelector(String category, ArrayList<String> keywords, ResourceFinder rf) {
             this.category = new JLabel(category);
             this.category.setFont(this.category.getFont().deriveFont(this.category.getFont().getStyle() | Font.BOLD));
             add(this.category);
             setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+            close = new JButton("V");
+            close.addActionListener(this);
+            add(close);
             for(int i = 0; i<keywords.size(); i++) {
                 JCheckBox box = new JCheckBox(keywords.get(i));
                 box.addActionListener(rf);
@@ -169,6 +173,20 @@ public class ResourceFinder extends JPanel implements ActionListener {
         }
 
 
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (close.getText().equals("V")) {
+                close.setText("^");
+                for (JCheckBox box : keywordBoxes) {
+                    box.setVisible(false);
+                }
+            } else {
+                close.setText("V");
+                for (JCheckBox box : keywordBoxes) {
+                    box.setVisible(true);
+                }
+            }
+        }
     }
 
     public class ResourceCard extends JPanel {
