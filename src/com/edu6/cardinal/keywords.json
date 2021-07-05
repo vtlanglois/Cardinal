@@ -1,0 +1,63 @@
+{
+  "computerScience": [
+    {
+      "category": "Language",
+      "keywords": [
+        "Block Coding",
+        "Python",
+        "Java",
+        "JavaScript",
+        "C",
+        "C++",
+        "C#"
+      ]
+    },
+
+    {
+      "category": "Age Range",
+      "keywords": [
+        "Grades K-2",
+        "Grades 3-5",
+        "Grades 6-8",
+        "Grades 9+"
+      ]
+    },
+    {
+      "category": "Cost",
+      "keywords": [
+        "Free",
+        "$1-20",
+        "$20-40"
+      ]
+    }
+  ],
+
+  "math": [
+
+    {
+      "category": "Topics",
+      "keywords": [
+        "Arithmetic",
+        "Algebra",
+        "Geometry",
+        "Calculus"
+      ]
+    },
+    {
+      "category": "Age Range",
+      "keywords": [
+        "Elementary",
+        "Middle",
+        "High"
+      ]
+    },
+    {
+      "category": "Cost",
+      "keywords": [
+        "Free",
+        "$1-20",
+        "$20-40"
+      ]
+    }
+  ]
+}

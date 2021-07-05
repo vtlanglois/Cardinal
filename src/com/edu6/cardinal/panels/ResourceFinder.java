@@ -17,20 +17,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ResourceFinder extends JPanel implements ActionListener {
-    String[][] items = {{"Block Coding", "Python", "JavaScript", "Java", "C", "C++"},
-                        {"Elementary", "Middle", "High"} };
-    ArrayList<String> dummy = new ArrayList<>();
     JLabel label3 = new JLabel("Resources");
     ArrayList<Resource> resources = new ArrayList<>();
+    List<ResourceCard> resourceCards = new ArrayList<>();
     List<KeywordSelector> keywordSelectors = new ArrayList<>();
     JPanel keywordPanel = new JPanel();
+    JPanel resourcePanel = new JPanel();
 
 
     public ResourceFinder(String topic) {
         setLookAndFeel();
         //TODO I am rusty with JSON, and this is the first time im using them in an non-Android program. will double check if efficient -V
+        //TODO: will need to rewrite JSON system at some point, especially when more data will be in each file -V
         try {
-            Object obj = new JSONParser().parse(new FileReader("src\\com\\edu6\\cardinal\\resources.json"));
+            Object obj = new JSONParser().parse(new FileReader("src\\com\\edu6\\cardinal\\keywords.json"));
             JSONObject jObj = (JSONObject) obj;
             JSONArray jArr = (JSONArray) jObj.get(topic);
             for(int i = 0; i<jArr.size(); i++) {
@@ -43,6 +43,21 @@ public class ResourceFinder extends JPanel implements ActionListener {
                 String category = (String) currentObj.get("category");
                 keywordSelectors.add(new KeywordSelector(category, keywords, this));
             }
+            obj =  new JSONParser().parse(new FileReader("src\\com\\edu6\\cardinal\\resources.json"));
+            jObj = (JSONObject) obj;
+            jArr = (JSONArray) jObj.get("resources");
+            for(int i = 0; i <jArr.size(); i++) {
+                System.out.println(jArr.toJSONString());
+                JSONObject currentObj = (JSONObject) jArr.get(i);
+                JSONArray keywordJSONArray = (JSONArray) currentObj.get("keywords");
+                List<String> keywords = new ArrayList<>();
+                for(int j = 0; j<keywordJSONArray.size();j++) {
+                    keywords.add((String) keywordJSONArray.get(j));
+                }
+                String name = (String) currentObj.get("name");
+                String desc = (String) currentObj.get("desc");
+                resourceCards.add(new ResourceCard(new Resource(name, desc, keywords)));
+            }
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ParseException e) {
@@ -50,8 +65,12 @@ public class ResourceFinder extends JPanel implements ActionListener {
         }
 
         keywordPanel.setLayout(new BoxLayout(keywordPanel, BoxLayout.PAGE_AXIS));
+        resourcePanel.setLayout(new BoxLayout(resourcePanel, BoxLayout.PAGE_AXIS));
         for(KeywordSelector keywordSelector : keywordSelectors) {
             keywordPanel.add(keywordSelector);
+        }
+        for(ResourceCard resourceCard : resourceCards) {
+            resourcePanel.add(resourceCard);
         }
         //TODO: Rework code
         for (int i = 0; i<3; i++) {
@@ -68,7 +87,7 @@ public class ResourceFinder extends JPanel implements ActionListener {
             label3.setText(label3.getText()+ ", " + resources.get(i).getName());
         }
         add(keywordPanel, BorderLayout.LINE_START);
-        add(label3, BorderLayout.LINE_END);
+        add(resourcePanel, BorderLayout.LINE_END);
 
     }
 
@@ -100,11 +119,20 @@ public class ResourceFinder extends JPanel implements ActionListener {
 
         System.out.println(searchedKeywords.toString());
 
-        for (Resource resource : resources) {
-            if (resource.containsAll(searchedKeywords)) {
-                label3.setText(label3.getText() + ", " + resource.getName());
+//        for (Resource resource : resources) {
+//            if (resource.containsAll(searchedKeywords)) {
+//                label3.setText(label3.getText() + ", " + resource.getName());
+//            }
+//        }
+
+        for (ResourceCard resourceCard : resourceCards) {
+            if(!(resourceCard.getKeywords().containsAll(searchedKeywords))) {
+                resourceCard.setVisible(false);
+            } else {
+                resourceCard.setVisible(true);
             }
         }
+
     }
 
 
@@ -129,22 +157,6 @@ public class ResourceFinder extends JPanel implements ActionListener {
 
         }
 
-        public ArrayList<JCheckBox> getKeywordBoxes() {
-            return keywordBoxes;
-        }
-
-        public void setKeywordBoxes(ArrayList<JCheckBox> keywordBoxes) {
-            this.keywordBoxes = keywordBoxes;
-        }
-
-        public ArrayList<String> getSelectedKeywords() {
-            return selectedKeywords;
-        }
-
-        public void setSelectedKeywords(ArrayList<String> selectedKeywords) {
-            this.selectedKeywords = selectedKeywords;
-        }
-
         public ArrayList<String> findSelectedKeywords() {
             selectedKeywords.clear();
             System.out.println("searching!");
@@ -156,6 +168,27 @@ public class ResourceFinder extends JPanel implements ActionListener {
             return selectedKeywords;
         }
 
+
+    }
+
+    public class ResourceCard extends JPanel {
+        JLabel name, desc, keywords;
+        Resource resource;
+        public ResourceCard(Resource resource) {
+            this.resource = resource;
+            setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+            name = new JLabel(resource.getName());
+            name.setFont(name.getFont().deriveFont(name.getFont().getStyle() | Font.BOLD));
+            desc = new JLabel(resource.getDesc());
+            keywords = new JLabel(resource.getKeywords().toString());
+            add(name);
+            add(keywords);
+            add(desc);
+        }
+
+        public List<String> getKeywords() {
+            return resource.getKeywords();
+        }
 
     }
 
