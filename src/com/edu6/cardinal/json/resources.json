@@ -1,5 +1,5 @@
 {
-  "resources": [
+  "computer_science": [
     {
       "name": "Scratch",
       "desc": "A free online coding website",
@@ -65,5 +65,18 @@
         "Grades 9+"
       ]
     }
-  ]
+  ],
+
+  "math": [
+    {
+      "name": "Scratch",
+      "desc": "A free online coding website",
+      "keywords": [
+        "Block Coding",
+        "Free",
+        "Grades 3-5",
+        "Grades 6-8"
+      ]
+    }
+    ]
 }

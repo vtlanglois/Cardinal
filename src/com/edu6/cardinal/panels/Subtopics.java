@@ -8,10 +8,10 @@ public class Subtopics extends JPanel {
 
     JButton topic_programming = new JButton("Programming");
     JButton topic_AI = new JButton("AI");
-    public Subtopics() {
+    public Subtopics(String topic) {
         setLookAndFeel();
         topic_programming.addActionListener(e -> {
-            ResourceFinder rf = new ResourceFinder("computerScience");
+            ResourceFinder rf = new ResourceFinder(topic);
             FrameManager.switchPanels(rf);
             FrameManager.addPanelToStack(this);
         });
@@ -21,7 +21,7 @@ public class Subtopics extends JPanel {
 
     }
 
-    private static void setLookAndFeel() {
+    private  void setLookAndFeel() {
         try {
             UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
         } catch (ClassNotFoundException e) {

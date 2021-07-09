@@ -32,6 +32,7 @@ public class FrameManager {
             }
         });
         frame.setVisible(true);
+        System.out.println("ready!");
     }
 
     //switch the current panel with a new panel
