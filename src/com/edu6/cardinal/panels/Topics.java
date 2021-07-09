@@ -11,10 +11,11 @@ public class Topics extends JPanel {
 
     JButton topic_computerScience = new JButton("💻 CS");
     JButton topic_math = new JButton("🧮 Math");
+    JButton upload = new JButton("⬆Upload");
     public Topics() {
 
         topic_computerScience.addActionListener(e -> {
-            Subtopics st = new Subtopics();
+            Subtopics st = new Subtopics("computer_science");
             FrameManager.switchPanels(st);
             FrameManager.addPanelToStack(this);
         });
@@ -24,8 +25,15 @@ public class Topics extends JPanel {
             FrameManager.switchPanels(rf);
             FrameManager.addPanelToStack(this);
         });
+        upload.addActionListener(e -> {
+            UploadResource uploadResource = new UploadResource();
+            FrameManager.switchPanels(uploadResource);
+            FrameManager.addPanelToStack(this);
+
+        });
         add(topic_computerScience, BorderLayout.PAGE_END);
         add(topic_math, BorderLayout.PAGE_START);
+        add(upload);
 
 
     }

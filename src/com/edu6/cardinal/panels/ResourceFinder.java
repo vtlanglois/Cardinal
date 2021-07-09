@@ -11,9 +11,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.sql.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class ResourceFinder extends JPanel implements ActionListener {
@@ -21,49 +24,21 @@ public class ResourceFinder extends JPanel implements ActionListener {
     List<KeywordSelector> keywordSelectors = new ArrayList<>();
     JPanel keywordPanel = new JPanel();
     JPanel resourcePanel = new JPanel();
-
+    JSONObject currentObj;
     public ResourceFinder(String topic) {
         setLookAndFeel();
-        //TODO I am rusty with JSON, and this is the first time im using them in an non-Android program. will double check if efficient -V
-        //TODO: will need to rewrite JSON system at some point, especially when more data will be in each file -V
         //TODO: maybe make a JSONManager class to handle the file format? or swap to mongoDB?
         try {
-            Object obj = new JSONParser().parse(new FileReader("src\\com\\edu6\\cardinal\\keywords.json"));
-            JSONObject jObj = (JSONObject) obj;
-            JSONArray jArr = (JSONArray) jObj.get(topic);
-            //go thru jArr, make JSONObject into a KeywordSelector
-            for(int i = 0; i<jArr.size(); i++) {
-                JSONObject currentObj = (JSONObject) jArr.get(i);
-                JSONArray keywordJSONArray = (JSONArray) currentObj.get("keywords");
-                ArrayList<String> keywords = new ArrayList<>();
-                //add keywords to a seperate ArrayList
-                //TODO: see if theres a way to do this step in one-line
-                for(int j = 0; j<keywordJSONArray.size();j++) {
-                    keywords.add((String) keywordJSONArray.get(j));
-                }
-                String category = (String) currentObj.get("category");
-                keywordSelectors.add(new KeywordSelector(category, keywords, this));
-            }
-            obj =  new JSONParser().parse(new FileReader("src\\com\\edu6\\cardinal\\resources.json"));
-            jObj = (JSONObject) obj;
-            jArr = (JSONArray) jObj.get("resources");
-            //do the same, but with resourcecards
-            for(int i = 0; i <jArr.size(); i++) {
-                System.out.println(jArr.toJSONString());
-                JSONObject currentObj = (JSONObject) jArr.get(i);
-                JSONArray keywordJSONArray = (JSONArray) currentObj.get("keywords");
-                List<String> keywords = new ArrayList<>();
-                for(int j = 0; j<keywordJSONArray.size();j++) {
-                    keywords.add((String) keywordJSONArray.get(j));
-                }
-                String name = (String) currentObj.get("name");
-                String desc = (String) currentObj.get("desc");
-                resourceCards.add(new ResourceCard(new Resource(name, desc, keywords)));
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
-            e.printStackTrace();
+            JSONObject obj = (JSONObject) new JSONParser().parse(new FileReader("src\\com\\edu6\\cardinal\\json\\topics.json"));
+            currentObj = (JSONObject) obj.get(topic);
+            generateKeywordSelectors();
+            generateResourceCards();
+        } catch (FileNotFoundException fileNotFoundException) {
+            fileNotFoundException.printStackTrace();
+        } catch (IOException ioException) {
+            ioException.printStackTrace();
+        } catch (ParseException parseException) {
+            parseException.printStackTrace();
         }
         JTextField textField = new JTextField();
         keywordPanel.setLayout(new BoxLayout(keywordPanel, BoxLayout.PAGE_AXIS));
@@ -90,6 +65,38 @@ public class ResourceFinder extends JPanel implements ActionListener {
                 }
             }
         });
+    }
+
+    private void generateResourceCards() {
+        JSONArray jArr = (JSONArray) currentObj.get("resources");
+        //go thru jArr, make each JSONObject into a ResourceCard
+        for(int i = 0; i<jArr.size(); i++) {
+            JSONObject currentResourceCard = (JSONObject) jArr.get(i);
+            JSONArray keywordJSONArray = (JSONArray) currentResourceCard.get("keywords");
+            String name = (String) currentResourceCard.get("name");
+            String desc = (String) currentResourceCard.get("desc");
+            ArrayList<String> keywords = new ArrayList<>();
+            for(Object keyword : keywordJSONArray) {
+                keywords.add((String) keyword);
+            }
+            resourceCards.add(new ResourceCard(new Resource(name, desc, keywords)));
+        }
+    }
+
+    private void generateKeywordSelectors() {
+        JSONArray jArr = (JSONArray) currentObj.get("keywords");
+        //go thru jArr, make each JSONObject into a KeywordSelector
+        for(int i = 0; i<jArr.size(); i++) {
+            JSONObject currentKeywordSelector = (JSONObject) jArr.get(i);
+            JSONArray keywordJSONArray = (JSONArray) currentKeywordSelector.get("keywords");
+            String category = (String) currentKeywordSelector.get("category");
+            ArrayList<String> keywords = new ArrayList<>();
+            for(Object keyword : keywordJSONArray) {
+                keywords.add((String) keyword);
+            }
+            keywordSelectors.add(new KeywordSelector(category, keywords, this));
+        }
+
     }
 
     private static void setLookAndFeel() {
@@ -133,7 +140,7 @@ public class ResourceFinder extends JPanel implements ActionListener {
 
 
     //TODO theres probably a better way to implement this, esp so that we dont have to pass the instance of ResourceFinder
-    public class KeywordSelector extends JPanel implements ActionListener{
+    class KeywordSelector extends JPanel implements ActionListener{
 
         private ArrayList<JCheckBox> keywordBoxes = new ArrayList<>();
         private JLabel category;
@@ -189,7 +196,7 @@ public class ResourceFinder extends JPanel implements ActionListener {
         }
     }
 
-    public class ResourceCard extends JPanel {
+    class ResourceCard extends JPanel {
         JLabel name, desc, keywords;
         Resource resource;
         public ResourceCard(Resource resource) {

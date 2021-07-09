@@ -1,0 +1,161 @@
+{
+  "computer_science": {
+    "keywords": [
+      {
+        "category": "Language",
+        "keywords": [
+          "Block Coding",
+          "Python",
+          "Java",
+          "JavaScript",
+          "C",
+          "C++",
+          "C#"
+        ]
+      },
+
+      {
+        "category": "Age Range",
+        "keywords": [
+          "Grades K-2",
+          "Grades 3-5",
+          "Grades 6-8",
+          "Grades 9+"
+        ]
+      },
+      {
+        "category": "Cost",
+        "keywords": [
+          "Free",
+          "$1-20",
+          "$20-40"
+        ]
+      }
+    ],
+    "resources": [
+      {
+        "name": "Scratch",
+        "desc": "A free online coding website",
+        "keywords": [
+          "Block Coding",
+          "Free",
+          "Grades 3-5",
+          "Grades 6-8"
+        ]
+      },
+      {
+        "name": "Scratch Jr.",
+        "desc": "Scratch, for a younger audience",
+        "keywords": [
+          "Block Coding",
+          "Free",
+          "Grades K-2"
+        ]
+      },
+      {
+        "name": "Minecraft: Education Edition - Computer Science",
+        "desc": "Use Minecraft to teach Computer Science!",
+        "keywords" : [
+          "Block Coding",
+          "Python",
+          "Grades 3-5",
+          "Grades 6-8",
+          "Free",
+          "$1-20"
+        ]
+      },
+      {
+        "name": "Microsoft MakeCode Arcade",
+        "desc": "Make retro games while learning programming!",
+        "keywords": [
+          "Free",
+          "Block Coding",
+          "JavaScript",
+          "Grades 6-8"
+        ]
+      },
+      {
+        "name": "micro:bit",
+        "desc": "Learn how-to program hardware!",
+        "keywords": [
+          "Free",
+          "$1-20",
+          "JavaScript",
+          "Python",
+          "Block Coding",
+          "Grades 6-8"
+        ]
+      }
+    ],
+    "subtopics": [
+      "Programming",
+      "AI",
+      "Machine Learning"
+    ]
+  },
+
+  "math": {
+    "keywords": [
+      {
+        "category": "Topics",
+        "keywords": [
+          "Arithmetic",
+          "Algebra",
+          "Geometry",
+          "Calculus"
+        ]
+      },
+      {
+        "category": "Age Range",
+        "keywords": [
+          "Elementary",
+          "Middle",
+          "High"
+        ]
+      },
+      {
+        "category": "Cost",
+        "keywords": [
+          "Free",
+          "$1-20",
+          "$20-40"
+        ]
+      }
+    ],
+    "resources": [
+      {
+        "name": "",
+        "desc": "",
+        "keywords": []
+      },
+      {
+        "name": "",
+        "desc": "",
+        "keywords": []
+      }
+    ],
+    "subtopics": []
+  },
+
+  "template": {
+    "keywords": [
+      {
+        "category": "",
+        "keywords": []
+      }
+    ],
+    "resources": [
+      {
+        "name": "",
+        "desc": "",
+        "keywords": []
+      },
+      {
+        "name": "",
+        "desc": "",
+        "keywords": []
+      }
+    ],
+    "subtopics": []
+  }
+}
