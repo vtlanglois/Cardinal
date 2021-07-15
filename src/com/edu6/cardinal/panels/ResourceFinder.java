@@ -13,6 +13,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.Array;
 import java.util.ArrayList;
@@ -40,7 +41,6 @@ public class ResourceFinder extends JPanel implements ActionListener {
         } catch (ParseException parseException) {
             parseException.printStackTrace();
         }
-        JTextField textField = new JTextField();
         keywordPanel.setLayout(new BoxLayout(keywordPanel, BoxLayout.PAGE_AXIS));
         resourcePanel.setLayout(new BoxLayout(resourcePanel, BoxLayout.PAGE_AXIS));
         //add all KeywordSelectors to their panel
@@ -52,19 +52,9 @@ public class ResourceFinder extends JPanel implements ActionListener {
             resourcePanel.add(resourceCard);
         }
         //add objects
-        add(textField, BorderLayout.NORTH);
         add(keywordPanel, BorderLayout.LINE_START);
         add(resourcePanel, BorderLayout.LINE_END);
         //TODO: make searching better, rn its a very rough draft
-        textField.addActionListener(e -> {
-            for (ResourceCard resourceCard : resourceCards) {
-                if (resourceCard.containsText(textField.getText())) {
-                    resourceCard.setVisible(true);
-                } else {
-                    resourceCard.setVisible(false);
-                }
-            }
-        });
     }
 
     private void generateResourceCards() {
@@ -75,11 +65,12 @@ public class ResourceFinder extends JPanel implements ActionListener {
             JSONArray keywordJSONArray = (JSONArray) currentResourceCard.get("keywords");
             String name = (String) currentResourceCard.get("name");
             String desc = (String) currentResourceCard.get("desc");
+            String author = (String) currentResourceCard.get("author");
             ArrayList<String> keywords = new ArrayList<>();
             for(Object keyword : keywordJSONArray) {
                 keywords.add((String) keyword);
             }
-            resourceCards.add(new ResourceCard(new Resource(name, desc, keywords)));
+            resourceCards.add(new ResourceCard(new Resource(name, desc, author, keywords), currentResourceCard));
         }
     }
 
@@ -99,7 +90,7 @@ public class ResourceFinder extends JPanel implements ActionListener {
 
     }
 
-    private static void setLookAndFeel() {
+    private void setLookAndFeel() {
         try {
             UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
         } catch (ClassNotFoundException e) {
@@ -150,6 +141,7 @@ public class ResourceFinder extends JPanel implements ActionListener {
             this.category = new JLabel(category);
             this.category.setFont(this.category.getFont().deriveFont(this.category.getFont().getStyle() | Font.BOLD));
             add(this.category);
+            setBorder(BorderFactory.createLineBorder(Color.black));
             setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
             close = new JButton("V");
             close.addActionListener(this);
@@ -196,30 +188,6 @@ public class ResourceFinder extends JPanel implements ActionListener {
         }
     }
 
-    class ResourceCard extends JPanel {
-        JLabel name, desc, keywords;
-        Resource resource;
-        public ResourceCard(Resource resource) {
-            this.resource = resource;
-            setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-            name = new JLabel(resource.getName());
-            name.setFont(name.getFont().deriveFont(name.getFont().getStyle() | Font.BOLD));
-            desc = new JLabel(resource.getDesc());
-            keywords = new JLabel(resource.getKeywords().toString());
-            add(name);
-            add(keywords);
-            add(desc);
-        }
 
-        public List<String> getKeywords() {
-            return resource.getKeywords();
-        }
-
-        //check if either the name or desc of the resource contains the inputted text
-        //String -> boolean
-        public boolean containsText(String text) {
-            return resource.getName().contains(text) || resource.getDesc().contains(text);
-        }
-    }
 
 }

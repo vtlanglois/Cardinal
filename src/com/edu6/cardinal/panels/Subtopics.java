@@ -21,7 +21,7 @@ public class Subtopics extends JPanel {
 
     }
 
-    private  void setLookAndFeel() {
+    private void setLookAndFeel() {
         try {
             UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
         } catch (ClassNotFoundException e) {
@@ -33,6 +33,7 @@ public class Subtopics extends JPanel {
         } catch (UnsupportedLookAndFeelException e) {
             e.printStackTrace();
         }
+        System.out.println("ruan");
     }
 
 }

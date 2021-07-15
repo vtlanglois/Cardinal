@@ -14,7 +14,7 @@ public class FrameManager {
     static JButton panels = new JButton("No panels"); //for testing purposes
     public FrameManager(JPanel panel) {
         //set up frame
-        setLookAndFeel();
+        //setLookAndFeel();
         frame = new JFrame("Cardinal");
         this.currentPanel = panel;
         frame.setSize((int)Toolkit.getDefaultToolkit().getScreenSize().getWidth(), (int)Toolkit.getDefaultToolkit().getScreenSize().getHeight());
@@ -43,7 +43,7 @@ public class FrameManager {
         frame.getContentPane().add(currentPanel);
         frame.revalidate();
         frame.repaint();
-        setLookAndFeel();
+
 
     }
 
@@ -55,6 +55,13 @@ public class FrameManager {
 
     }
 
+    public static void addPanelToList(JPanel panel) {
+
+    }
+
+    public static void loadSelectedPanel() {
+
+    }
 
     //set appearance of the frame
     //TODO: figure out why its not working for any panel after first;
@@ -70,5 +77,10 @@ public class FrameManager {
         } catch (UnsupportedLookAndFeelException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void removeFromBackStack() {
+        previousPanels.pop();
+        panels.setText(previousPanels.size() + "");
     }
 }

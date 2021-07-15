@@ -35,6 +35,7 @@
     "resources": [
       {
         "name": "Scratch",
+        "author": "MIT",
         "desc": "A free online coding website",
         "keywords": [
           "Block Coding",
@@ -45,6 +46,7 @@
       },
       {
         "name": "Scratch Jr.",
+        "author": "MIT",
         "desc": "Scratch, for a younger audience",
         "keywords": [
           "Block Coding",
@@ -54,6 +56,7 @@
       },
       {
         "name": "Minecraft: Education Edition - Computer Science",
+        "author": "Mojang Studios",
         "desc": "Use Minecraft to teach Computer Science!",
         "keywords" : [
           "Block Coding",
@@ -66,6 +69,7 @@
       },
       {
         "name": "Microsoft MakeCode Arcade",
+        "author": "Microsoft",
         "desc": "Make retro games while learning programming!",
         "keywords": [
           "Free",
@@ -76,6 +80,7 @@
       },
       {
         "name": "micro:bit",
+        "author": "BBC",
         "desc": "Learn how-to program hardware!",
         "keywords": [
           "Free",
@@ -124,14 +129,14 @@
     ],
     "resources": [
       {
-        "name": "",
-        "desc": "",
-        "keywords": []
+        "name": "Resource A",
+        "desc": "This is Resource A",
+        "keywords": ["Free", "Elementary", "Algebra"]
       },
       {
-        "name": "",
-        "desc": "",
-        "keywords": []
+        "name": "Resource B",
+        "desc": "This is Resource B",
+        "keywords": ["$20-40", "High", "Calculus"]
       }
     ],
     "subtopics": []

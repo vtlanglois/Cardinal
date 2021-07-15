@@ -5,12 +5,13 @@ import java.util.List;
 
 public class Resource {
 
-    private String name, desc;
+    private String name, desc, author;
     private List<String> keywords = new ArrayList<>();
 
-    public Resource(String name, String desc, List<String> keywords) {
+    public Resource(String name, String desc, String author, List<String> keywords) {
         this.name = name;
         this.desc = desc;
+        this.author = author;
         this.keywords = keywords;
     }
 
@@ -36,6 +37,14 @@ public class Resource {
 
     public void setKeywords(List<String> keywords) {
         this.keywords = keywords;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
     public boolean containsAll(List<String> searchedKeywords) {

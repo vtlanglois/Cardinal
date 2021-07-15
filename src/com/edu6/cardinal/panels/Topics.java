@@ -12,8 +12,11 @@ public class Topics extends JPanel {
     JButton topic_computerScience = new JButton("💻 CS");
     JButton topic_math = new JButton("🧮 Math");
     JButton upload = new JButton("⬆Upload");
+    JButton favorites = new JButton("Favorites");
+    JButton personalResources = new JButton("Your Resources");
     public Topics() {
-
+        setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
         topic_computerScience.addActionListener(e -> {
             Subtopics st = new Subtopics("computer_science");
             FrameManager.switchPanels(st);
@@ -31,9 +34,36 @@ public class Topics extends JPanel {
             FrameManager.addPanelToStack(this);
 
         });
-        add(topic_computerScience, BorderLayout.PAGE_END);
-        add(topic_math, BorderLayout.PAGE_START);
-        add(upload);
+
+        favorites.addActionListener(e -> {
+            SavedResources savedResources = new SavedResources();
+            FrameManager.switchPanels(savedResources);
+            FrameManager.addPanelToStack(this);
+
+        });
+
+        personalResources.addActionListener(e -> {
+            YourResources yourResources = new YourResources();
+            FrameManager.switchPanels(yourResources);
+            FrameManager.addPanelToStack(this);
+        });
+        c.weightx = 0.25;
+        c.weighty = 0.25;
+        c.gridx = 0;
+        c.gridy = 0;
+        c.ipadx = 60;
+        c.ipady = 10;
+        add(topic_computerScience, c);
+        c.gridx = 2;
+        c.gridy = 0;
+        add(topic_math, c);
+        c.gridx = 0;
+        c.gridy = 1;
+        add(upload, c);
+        c.gridx = 2;
+        add(favorites, c);
+        c.gridx = 3;
+        add(personalResources, c);
 
 
     }
