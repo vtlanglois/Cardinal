@@ -18,6 +18,7 @@ public class ResourceCard extends JPanel {
     JLabel name, desc, author, keywords;
     Resource resource;
     JButton favorite;
+    JPanel info = new JPanel(), buttons= new JPanel(), image= new JPanel();
     public ResourceCard(Resource resource, JSONObject jObj) {
         this.resource = resource;
         this.jObj = jObj;
@@ -25,6 +26,7 @@ public class ResourceCard extends JPanel {
         name.setFont(name.getFont().deriveFont(name.getFont().getStyle() | Font.BOLD));
         desc = new JLabel(resource.getDesc());
         author = new JLabel("By: " + resource.getAuthor());
+        author.setFont(author.getFont().deriveFont(author.getFont().getStyle() | Font.BOLD));
         keywords = new JLabel(resource.getKeywords().toString());
         favorite = new JButton("⭐");
         favorite.addActionListener(e -> {
@@ -42,24 +44,21 @@ public class ResourceCard extends JPanel {
                 parseException.printStackTrace();
             }
         });
-        setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+        setLayout(new BorderLayout());
+        info.setLayout(new BoxLayout(info, BoxLayout.PAGE_AXIS));
+        buttons.setLayout(new BoxLayout(buttons, BoxLayout.PAGE_AXIS));
+        image.setLayout(new BoxLayout(image, BoxLayout.PAGE_AXIS));
         setBorder(BorderFactory.createLineBorder(Color.black));
-////            GridBagConstraints c = new GridBagConstraints();
-////            c.gridx = 0;
-////            c.gridy = 0;
-//            add(name, c);
-////            c.gridy = 1;
-//            add(keywords,c);
-//            c.gridy = 2;
-//            add(desc,c);
-//            c.gridx=0;
-//            c.gridy=2;
-//            add(favorite,c);
-        add(name);
-        add(author);
-        add(keywords);
-        add(desc);
-        add(favorite);
+        image.add(new JLabel(new ImageIcon("src\\com\\edu6\\cardinal\\default.png")));
+        image.add(author);
+        info.add(name);
+        info.add(keywords);
+        info.add(desc);
+        buttons.add(favorite);
+        add(image, BorderLayout.LINE_START);
+        add(info, BorderLayout.CENTER);
+        add(buttons, BorderLayout.LINE_END);
+
     }
 
     public List<String> getKeywords() {
