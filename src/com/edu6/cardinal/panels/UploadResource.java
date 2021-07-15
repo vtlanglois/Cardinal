@@ -20,11 +20,53 @@ public class UploadResource extends JPanel {
     JComboBox topics = new JComboBox(topicsList);
     JButton upload = new JButton("Upload");
     public UploadResource() {
-        setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-        resourceName.setToolTipText("Name");
-        resourceAuthor.setToolTipText("Author");
-        resourceDesc.setToolTipText("Desc");
-        resourceKeywords.setToolTipText("Keywords");
+//        setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+//        resourceName.setToolTipText("Name");
+//        resourceAuthor.setToolTipText("Author");
+//        resourceDesc.setToolTipText("Desc");
+//        resourceKeywords.setToolTipText("Keywords");
+//        setLayout(new GridLayout(0,2));
+        setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
+//        add(new JLabel("Title: "));
+//        add(resourceName);
+//        add(new JLabel("Author: "));
+//        add(resourceAuthor);
+//        add(new JLabel("Desc: "));
+//        add(resourceDesc);
+//        add(new JLabel("Keywords: "));
+//        add(resourceKeywords);
+//        add(topics);
+//        add(upload);
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridx = 0;
+        c.gridy = 0;
+        add(new JLabel("Title: "), c);
+        c.gridx = 1;
+        add(resourceName, c);
+        c.gridx = 0;
+        c.gridy = 1;
+        add(new JLabel("Author: "), c);
+        c.gridx = 1;
+        add(resourceAuthor, c);
+        c.gridx = 0;
+        c.gridy = 2;
+        add(new JLabel("Desc: "), c);
+        c.gridx = 1;
+        add(resourceDesc, c);
+        c.gridx = 0;
+        c.gridy = 3;
+        add(new JLabel("Keywords: "), c);
+        c.gridx = 1;
+        add(resourceKeywords, c);
+        c.gridx = 0;
+        c.gridy = 4;
+        add(new JLabel("Topic: "));
+        c.gridx = 1;
+        add(topics, c);
+        c.gridx = 0;
+        c.gridy = 5;
+        add(upload, c);
         upload.addActionListener(e -> {
             try {
                 JSONArray jArr = (JSONArray) new JSONParser().parse(new FileReader("src\\com\\edu6\\cardinal\\json\\uploads.json"));
@@ -53,11 +95,5 @@ public class UploadResource extends JPanel {
                 parseException.printStackTrace();
             }
         });
-        add(resourceName);
-        add(resourceAuthor);
-        add(resourceDesc);
-        add(resourceKeywords);
-        add(topics);
-        add(upload);
     }
 }
