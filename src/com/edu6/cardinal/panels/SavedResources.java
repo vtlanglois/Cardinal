@@ -46,6 +46,7 @@ public class SavedResources extends JPanel {
             resourceCard.favorite.setEnabled(false);
             resourcePanel.add(resourceCard);
         }
-        add(resourcePanel, BorderLayout.LINE_END);
+        setLayout(new BorderLayout());
+        add(new JScrollPane(resourcePanel), BorderLayout.CENTER);
     }
 }

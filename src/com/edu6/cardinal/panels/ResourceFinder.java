@@ -25,6 +25,7 @@ public class ResourceFinder extends JPanel implements ActionListener {
     List<KeywordSelector> keywordSelectors = new ArrayList<>();
     JPanel keywordPanel = new JPanel();
     JPanel resourcePanel = new JPanel();
+    JPanel resourcePanelScroller = new JPanel();
     JSONObject currentObj;
     public ResourceFinder(String topic) {
         setLookAndFeel();
