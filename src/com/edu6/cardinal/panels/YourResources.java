@@ -44,6 +44,9 @@ public class YourResources extends JPanel {
         for(ResourceCard resourceCard : resourceCards) {
             resourcePanel.add(resourceCard);
         }
-        add(resourcePanel, BorderLayout.LINE_END);
+        setLayout(new BorderLayout());
+        add(new JScrollPane(resourcePanel), BorderLayout.CENTER);
+
+
     }
 }
