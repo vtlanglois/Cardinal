@@ -9,11 +9,12 @@ import java.awt.*;
 
 public class Topics extends JPanel {
 
-    JButton topic_computerScience = new JButton("💻 CS");
+    JButton topic_computerScience = new JButton("Science");
     JButton topic_math = new JButton("🧮 Math");
     JButton upload = new JButton("⬆Upload");
     JButton favorites = new JButton("Favorites");
     JButton personalResources = new JButton("Your Resources");
+    JButton wellness = new JButton("Wellness");
     public Topics() {
         setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
@@ -47,6 +48,12 @@ public class Topics extends JPanel {
             FrameManager.switchPanels(yourResources);
             FrameManager.addPanelToStack(this);
         });
+
+        wellness.addActionListener(e -> {
+            Wellness wellness = new Wellness();
+            FrameManager.switchPanels(wellness);
+            FrameManager.addPanelToStack(this);
+        });
         c.weightx = 0.25;
         c.weighty = 0.25;
         c.gridx = 0;
@@ -57,6 +64,9 @@ public class Topics extends JPanel {
         c.gridx = 2;
         c.gridy = 0;
         add(topic_math, c);
+        c.gridx = 3;
+        c.gridy = 0;
+        add(wellness, c);
         c.gridx = 0;
         c.gridy = 1;
         add(upload, c);
