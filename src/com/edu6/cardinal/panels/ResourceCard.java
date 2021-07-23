@@ -68,9 +68,4 @@ public class ResourceCard extends JPanel {
         return resource.getKeywords();
     }
 
-    //check if either the name or desc of the resource contains the inputted text
-    //String -> boolean
-    public boolean containsText(String text) {
-        return resource.getName().contains(text) || resource.getDesc().contains(text);
-    }
 }

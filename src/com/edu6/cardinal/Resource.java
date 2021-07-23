@@ -43,14 +43,5 @@ public class Resource {
         return author;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
-    }
 
-    public boolean containsAll(List<String> searchedKeywords) {
-        if (keywords.containsAll(searchedKeywords)) {
-            return true;
-        }
-        return false;
-    }
 }

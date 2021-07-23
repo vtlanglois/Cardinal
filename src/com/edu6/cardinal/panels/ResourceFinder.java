@@ -25,11 +25,9 @@ public class ResourceFinder extends JPanel implements ActionListener {
     List<KeywordSelector> keywordSelectors = new ArrayList<>();
     JPanel keywordPanel = new JPanel();
     JPanel resourcePanel = new JPanel();
-    JPanel resourcePanelScroller = new JPanel();
     JSONObject currentObj;
     public ResourceFinder(String topic) {
         setLookAndFeel();
-        //TODO: maybe make a JSONManager class to handle the file format? or swap to mongoDB?
         try {
             //using database, create the necessary keyword selectors and resource cards
             JSONObject obj = (JSONObject) new JSONParser().parse(new FileReader("src\\com\\edu6\\cardinal\\json\\topics.json"));
@@ -134,7 +132,6 @@ public class ResourceFinder extends JPanel implements ActionListener {
     }
 
 
-    //TODO theres probably a better way to implement this, esp so that we dont have to pass the instance of ResourceFinder
     class KeywordSelector extends JPanel implements ActionListener{
 
         private ArrayList<JCheckBox> keywordBoxes = new ArrayList<>();
