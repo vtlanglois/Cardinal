@@ -19,6 +19,7 @@ public class YourResources extends JPanel {
     JPanel resourcePanel = new JPanel();
     public YourResources() {
         try {
+            //get all user-created resources
             JSONArray jArr = (JSONArray) new JSONParser().parse(new FileReader("src\\com\\edu6\\cardinal\\json\\uploads.json"));
             for(int i = 0; i<jArr.size(); i++) {
                 JSONObject currentResourceCard = (JSONObject) jArr.get(i);

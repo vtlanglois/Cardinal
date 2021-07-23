@@ -19,6 +19,7 @@ public class ResourceCard extends JPanel {
     Resource resource;
     JButton favorite;
     JPanel info = new JPanel(), buttons= new JPanel(), image= new JPanel();
+
     public ResourceCard(Resource resource, JSONObject jObj) {
         this.resource = resource;
         this.jObj = jObj;
@@ -31,6 +32,7 @@ public class ResourceCard extends JPanel {
         favorite = new JButton("⭐");
         favorite.addActionListener(e -> {
             try {
+                //on click, add resource to favorties
                 JSONArray jArr = (JSONArray) new JSONParser().parse(new FileReader("src\\com\\edu6\\cardinal\\json\\saved.json"));
                 jArr.add(this.jObj);
                 System.out.println(jArr.toJSONString());
@@ -45,6 +47,7 @@ public class ResourceCard extends JPanel {
             }
         });
         setLayout(new BorderLayout());
+        //set up GUI
         info.setLayout(new BoxLayout(info, BoxLayout.PAGE_AXIS));
         buttons.setLayout(new BoxLayout(buttons, BoxLayout.PAGE_AXIS));
         image.setLayout(new BoxLayout(image, BoxLayout.PAGE_AXIS));

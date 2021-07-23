@@ -16,10 +16,12 @@ public class Subtopics extends JPanel {
         setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
         computer_science.addActionListener(e -> {
+            //create new page, use FrameManager methods
             ResourceFinder rf = new ResourceFinder(topic);
             FrameManager.switchPanels(rf);
             FrameManager.addPanelToStack(this);
         });
+        //set up GUI
         c.weightx = 0.25;
         c.weighty = 0.25;
         c.gridx = 0;

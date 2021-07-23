@@ -1,7 +1,6 @@
 package com.edu6.cardinal.panels;
 
 import com.edu6.cardinal.FrameManager;
-import com.edu6.cardinal.HintTextFieldUI;
 import org.json.simple.*;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -20,24 +19,9 @@ public class UploadResource extends JPanel {
     JComboBox topics = new JComboBox(topicsList);
     JButton upload = new JButton("Upload");
     public UploadResource() {
-//        setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-//        resourceName.setToolTipText("Name");
-//        resourceAuthor.setToolTipText("Author");
-//        resourceDesc.setToolTipText("Desc");
-//        resourceKeywords.setToolTipText("Keywords");
-//        setLayout(new GridLayout(0,2));
+        //set up GUI
         setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
-//        add(new JLabel("Title: "));
-//        add(resourceName);
-//        add(new JLabel("Author: "));
-//        add(resourceAuthor);
-//        add(new JLabel("Desc: "));
-//        add(resourceDesc);
-//        add(new JLabel("Keywords: "));
-//        add(resourceKeywords);
-//        add(topics);
-//        add(upload);
         c.fill = GridBagConstraints.HORIZONTAL;
         c.gridx = 0;
         c.gridy = 0;
@@ -69,6 +53,7 @@ public class UploadResource extends JPanel {
         add(upload, c);
         upload.addActionListener(e -> {
             try {
+                //convert input to a new resource
                 JSONArray jArr = (JSONArray) new JSONParser().parse(new FileReader("src\\com\\edu6\\cardinal\\json\\uploads.json"));
                 JSONObject newUpload = new JSONObject();
                 newUpload.put("name", resourceName.getText());

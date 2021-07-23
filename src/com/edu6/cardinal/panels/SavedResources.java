@@ -19,10 +19,12 @@ public class SavedResources extends JPanel {
     JPanel resourcePanel = new JPanel();
     public SavedResources() {
         try {
+            //get all saved resources from database
             JSONArray jArr = (JSONArray) new JSONParser().parse(new FileReader("src\\com\\edu6\\cardinal\\json\\saved.json"));
             for(int i = 0; i<jArr.size(); i++) {
                 JSONObject currentResourceCard = (JSONObject) jArr.get(i);
                 JSONArray keywordJSONArray = (JSONArray) currentResourceCard.get("keywords");
+                //using JSONObject, create a new Resource Card
                 String name = (String) currentResourceCard.get("name");
                 String desc = (String) currentResourceCard.get("desc");
                 String author = (String) currentResourceCard.get("author");

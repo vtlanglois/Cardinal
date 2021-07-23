@@ -9,6 +9,7 @@ public class Wellness extends JPanel {
     JButton read = new JButton("Wellbeing Resources");
 
     public Wellness() {
+        //set up GUI
         setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
         c.weightx = 0.25;

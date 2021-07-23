@@ -31,6 +31,7 @@ public class ResourceFinder extends JPanel implements ActionListener {
         setLookAndFeel();
         //TODO: maybe make a JSONManager class to handle the file format? or swap to mongoDB?
         try {
+            //using database, create the necessary keyword selectors and resource cards
             JSONObject obj = (JSONObject) new JSONParser().parse(new FileReader("src\\com\\edu6\\cardinal\\json\\topics.json"));
             currentObj = (JSONObject) obj.get(topic);
             generateKeywordSelectors();
@@ -58,6 +59,7 @@ public class ResourceFinder extends JPanel implements ActionListener {
         //TODO: make searching better, rn its a very rough draft
     }
 
+    //generates all neccessary Resource Card GUI elements
     private void generateResourceCards() {
         JSONArray jArr = (JSONArray) currentObj.get("resources");
         //go thru jArr, make each JSONObject into a ResourceCard
@@ -75,6 +77,7 @@ public class ResourceFinder extends JPanel implements ActionListener {
         }
     }
 
+    //generates all neccessary Keyword Selector GUI elements
     private void generateKeywordSelectors() {
         JSONArray jArr = (JSONArray) currentObj.get("keywords");
         //go thru jArr, make each JSONObject into a KeywordSelector
