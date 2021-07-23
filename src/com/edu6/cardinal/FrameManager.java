@@ -21,7 +21,6 @@ public class FrameManager {
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(currentPanel);
-        //the following are for testing purposes
         frame.add(panels, BorderLayout.PAGE_START);
         panels.addActionListener(e -> {
             try {
@@ -55,13 +54,6 @@ public class FrameManager {
 
     }
 
-    public static void addPanelToList(JPanel panel) {
-
-    }
-
-    public static void loadSelectedPanel() {
-
-    }
 
     //set appearance of the frame
     //TODO: figure out why its not working for any panel after first;

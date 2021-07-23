@@ -19,17 +19,20 @@ public class Topics extends JPanel {
         setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
         topic_computerScience.addActionListener(e -> {
+            //create new page, use FrameManager methods
             Subtopics st = new Subtopics("computer_science");
             FrameManager.switchPanels(st);
             FrameManager.addPanelToStack(this);
         });
 
         topic_math.addActionListener(e -> {
+            //create new page, use FrameManager methods
             ResourceFinder rf = new ResourceFinder("math");
             FrameManager.switchPanels(rf);
             FrameManager.addPanelToStack(this);
         });
         upload.addActionListener(e -> {
+            //create new page, use FrameManager methods
             UploadResource uploadResource = new UploadResource();
             FrameManager.switchPanels(uploadResource);
             FrameManager.addPanelToStack(this);
@@ -37,6 +40,7 @@ public class Topics extends JPanel {
         });
 
         favorites.addActionListener(e -> {
+            //create new page, use FrameManager methods
             SavedResources savedResources = new SavedResources();
             FrameManager.switchPanels(savedResources);
             FrameManager.addPanelToStack(this);
@@ -44,16 +48,19 @@ public class Topics extends JPanel {
         });
 
         personalResources.addActionListener(e -> {
+            //create new page, use FrameManager methods
             YourResources yourResources = new YourResources();
             FrameManager.switchPanels(yourResources);
             FrameManager.addPanelToStack(this);
         });
 
         wellness.addActionListener(e -> {
+            //create new page, use FrameManager methods
             Wellness wellness = new Wellness();
             FrameManager.switchPanels(wellness);
             FrameManager.addPanelToStack(this);
         });
+        //set up GUI
         c.weightx = 0.25;
         c.weighty = 0.25;
         c.gridx = 0;
